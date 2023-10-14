@@ -6,19 +6,35 @@
           hide-details="auto"
           placeholder="Buscar entradas"
           type="text"
+          v-model="termino"
         ></v-text-field>
       </v-responsive>
     </div>
     <div class="entry-scroll-area mt-3">
-      <Entry v-for="item in 100" :key="item"></Entry>
+      <Entry
+        v-for="entry in entriesByTerm"
+        :key="entry.id"
+        :entry="entry"
+      ></Entry>
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent, ref, computed } from "vue";
+import { useDaybookStore } from "@/modules/daybook/store/daybook.js";
+// import { storeToRefs } from "pinia";
 
 const Entry = defineAsyncComponent(() => import("./EntryV.vue"));
+const store = useDaybookStore();
+// const { entries } = storeToRefs(store);
+const { getEntriesByTerm } = store;
+
+const termino = ref("");
+
+const entriesByTerm = computed(() => {
+  return getEntriesByTerm(termino.value);
+});
 </script>
 
 <style scoped>

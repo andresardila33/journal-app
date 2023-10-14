@@ -1,10 +1,15 @@
 <template>
-  <v-btn class="f-button ma-2" color="primary" :icon="icon" size="x-large">
+  <v-btn
+    class="f-button ma-2"
+    color="primary"
+    :icon="props.icon"
+    size="x-large"
+  >
   </v-btn>
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   icon: {
     type: String,
     default: "mdi-cloud-upload",

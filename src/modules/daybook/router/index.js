@@ -11,6 +11,11 @@ const daybookRouter = {
       path: ":id",
       name: "entry",
       component: () => import("@/modules/daybook/views/EntryView.vue"),
+      props: (route) => {
+        return {
+          id: route.params.id,
+        };
+      },
     },
   ],
 };
